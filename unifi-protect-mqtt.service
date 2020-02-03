@@ -1,0 +1,14 @@
+[Unit]
+Description=Unifi Protect Motion Detection to MQTT
+After=network.target
+
+[Service]
+User=unifi-protect
+Restart=always
+RestartSec=5
+Type=simple
+ExecStart=/usr/local/bin/unifi-protect-mqtt.sh
+TimeoutStopSec=20
+
+[Install]
+WantedBy=multi-user.target
