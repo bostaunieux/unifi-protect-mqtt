@@ -7,8 +7,10 @@ User=unifi-protect
 Restart=always
 RestartSec=5
 Type=simple
-ExecStart=/usr/local/bin/unifi-protect-mqtt.sh
+ExecStart=/usr/bin/node -r dotenv/config /usr/local/lib/unifi-protect-mqtt/index.js
 TimeoutStopSec=20
+Environment=NODE_ENV=production
+WorkingDirectory=/usr/local/lib/unifi-protect-mqtt/
 
 [Install]
 WantedBy=multi-user.target
