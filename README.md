@@ -27,11 +27,12 @@ systemctl enable unifi-protect-mqtt
     ```
 
 ## Guide
-This will publish start and stop events when motion is detected to a topic with the following format:
+This will publish start and stop events when motion is detected to a topic with the following format: `unifi/camera/motion/{snakecase_camera_name}`
+
+Sample topic
 ```
-unifi/camera/motion/{snakecase_camera_name}
+unifi/camera/motion/front_door
 ```
-Sample topic: `unifi/camera/motion/front_door`
 
 The body will be JSON-formatted with the following keys
 
@@ -42,7 +43,7 @@ The body will be JSON-formatted with the following keys
 | timestamp   | Unix timestamp of the event                         |
 | status      | Start or end of camera motion; one of "ON" or "OFF" |
 
-Sample payload:
+Sample payload
 ```
 {
     "timestamp": 1598979756369,
