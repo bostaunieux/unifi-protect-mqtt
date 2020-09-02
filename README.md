@@ -1,5 +1,9 @@
 # unifi-protect-mqtt
 
+This service will listen for motion events on any Unifi cameras and publish topics on an MQTT broker for each start and stop event. While you can alternatively poll the Unifi protect API for updates, this approach is less resource-intensive, although more invasive. If Unifi ever releases a real-time events API for the Cloud Key, this will no longer be needed.
+
+You use this at your own risk and I provide no warranties against breaking anything on your Unifi hardware.
+
 ## Installation
 
 The installation should be done on your Cloud Key G2
