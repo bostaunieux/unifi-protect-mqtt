@@ -2,6 +2,8 @@ const mqtt = require('mqtt');
 const Tail = require('tail').Tail;
 
 const WATCH_FILE = process.env.WATCH_FILE || '/srv/unifi-protect/logs/events.cameras.log';
+const DOORBELL_CAMERA = process.env.DOORBELL_CAMERA;
+
 
 const client = mqtt.connect(process.env.MQTT_HOST, {
   username: process.env.MQTT_USER, 
@@ -27,7 +29,11 @@ const extractData = (line, regex) => {
   return null;
 };
 
-const parseLine = (data) => {
+const parseRingLine = (data) => {
+  return data.includes("type: 'ring'");
+};
+
+const parseMotionLine = (data) => {
   if (!data.includes('verbose: motion')) {
     return {};
   }
@@ -58,7 +64,13 @@ client.on('connect', async () => {
   watcher = new Tail(WATCH_FILE, { separator: null});
 
   watcher.on('line', (line) => {
-    const { cameraId, cameraName, cameraNameTopic, eventType, timestamp } = parseLine(line);
+    const isRing = parseRingLine(line);
+    if (isRing && DOORBELL_CAMERA) {
+      client.publish(`homebridge/doorbell`, DOORBELL_CAMERA);
+      return;
+    }
+
+    const { cameraId, cameraName, cameraNameTopic, eventType, timestamp } = parseMotionLine(line);
     if (!cameraId || !eventType || isNaN(timestamp)) {
       return;
     }

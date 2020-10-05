@@ -25,10 +25,14 @@ systemctl enable unifi-protect-mqtt
     * `MQTT_HOST`=mqtt://192.168.1.6
     * `MQTT_USER`=unifi-mqtt
     * `MQTT_PASS`=password
+    * `WATCH_FILE`=/foo/bar (Optional: Override the camera events file to watch)
+    * `DOORBELL_CAMERA`=Front Door (Optional: Set to the camera name for any doorbell; will monitor for ring events)
 2. Confirm the service starts without errors by running
     ```
     /usr/bin/node -r dotenv/config /usr/local/lib/unifi-protect-mqtt/index.js
     ```
+
+
 
 ## Guide
 This will publish start and stop events when motion is detected to a topic with the following format: `unifi/camera/motion/{snakecase_camera_name}`
