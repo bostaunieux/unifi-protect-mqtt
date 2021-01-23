@@ -1,6 +1,6 @@
 # unifi-protect-mqtt
 
-> This project predates the release of UnifiOS on all Unifi devices. With UnifiOS, the protect service now supports real-time event updates using WebSockets, so running a separate service is no longer required. See [unifi-protect-video-downloader](https://github.com/bostaunieux/unifi-protect-video-downloader) for an example of how this is done.
+> This project has been archived. It predates the release of UnifiOS on all Unifi devices. With UnifiOS, the protect service now supports real-time event updates using WebSockets, so running a separate service is no longer required. See [unifi-protect-video-downloader](https://github.com/bostaunieux/unifi-protect-video-downloader) for an example of how this is done.
 
 This service will listen for motion events on any Unifi cameras conneted to the Unifi Protect platform and publish messages to an MQTT broker for each start and stop event. While you can alternatively poll the Unifi Protect API for updates, this approach is less resource-intensive, although more invasive. If Unifi ever releases a real-time events API for the Cloud Key, this will no longer be needed.
 
